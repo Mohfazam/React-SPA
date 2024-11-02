@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, createContext } from "react";
+
+const bulbContext = createContext();
 
 function App(){
 
