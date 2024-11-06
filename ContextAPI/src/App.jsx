@@ -1,26 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-function Parent() {
+const CountContext = createContext();
+
+function CountContextProvider({ children }) {
   const [count, setCount] = useState(0);
 
+  return <CountContext.Provider value={{count, setCount}}>
+    {children}
+  </CountContext.Provider>
+}
+
+function Parent() {
   return (
-    <>
-      <Incrase count={count} setCount={setCount} />
-      <Decrease count={count} setCount={setCount} />
-      <Value count={count} setCount={setCount} />
-    </>
+    <CountContextProvider>
+      <Incrase />
+      <Decrease />
+      <Value />
+    </CountContextProvider>
   );
 }
 
-function Decrease({ count, setCount }) {
+function Decrease() {
+  const {count, setCount} = useContext(CountContext);
   return <button onClick={() => setCount(count - 1)}>Decrease</button>;
 }
 
-function Incrase({ count, setCount }) {
+function Incrase() {
+  const {count, setCount} = useContext(CountContext);
   return <button onClick={() => setCount(count + 1)}>Increase</button>;
 }
 
-function Value({ count }) {
+function Value() {
+  const {count} = useContext(CountContext);
   return <p>Count: {count}</p>;
 }
 
