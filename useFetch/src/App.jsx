@@ -5,7 +5,13 @@ import { useFetch } from './hooks/useFetch'
 
 function App() {
   const [currentPost, setCurrentPost] = useState(1);
-  const { finalData } = useFetch("https://jsonplaceholder.typicode.com/posts/" + currentPost);
+  const { finalData, Loading } = useFetch("https://jsonplaceholder.typicode.com/posts/" + currentPost);
+
+  if(Loading) {
+    return (
+      <div>Yo its loading... </div>
+    )
+  }
 
   return (
     <div>
