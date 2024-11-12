@@ -7,6 +7,8 @@ function App() {
     inputref.current.focus();
   }
 
+
+  
   return (
     <div>
       Sign Up
