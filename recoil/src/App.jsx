@@ -1,41 +1,35 @@
-import React, { createContext, useContext, useState } from 'react';
-import { RecoilRoot, atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-const count = atom({
-  key: 'countState', // unique ID (with respect to other atoms/selectors)
-  default: 0, // default value (aka initial value)
-});
+function App() {
+  const [count, setCount] = useState(0)
 
-function Parent() {
   return (
-    <RecoilRoot>
-      <Incrase />
-      <Decrease />
-      <Value />
-    </RecoilRoot>
-  );
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-function Decrease() {
-  const setCount = useSetRecoilState(count);
-  return <button onClick={() => setCount(count => count - 1)}>Decrease</button>;
-}
-
-function Incrase() {
-  const setCount = useSetRecoilState(count);
-  return <button onClick={() => setCount(count => count + 1)}>Increase</button>;
-}
-
-function Value() {
-  const countValue = useRecoilValue(count);
-  return <p>Count: {countValue}</p>;
-}
-
-// App Component
-const App = () => {
-  return <div>
-    <Parent />
-  </div>
-};
-
-export default App;
+export default App
